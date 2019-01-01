@@ -26,15 +26,15 @@ const styles = {
 }
 
 function MyButton(props) {
-  const { classes, children, className, ...other } = props
+  const { classes, children, className, ...rest } = props
   return (
     <Button
       className={classNames(
         classes.root,
-        other.disabled ? classes.disabled : null,
+        rest.disabled ? classes.disabled : null,
         className
       )}
-      {...other}
+      {...rest}
     >
       {children || 'class names'}
     </Button>

@@ -29,9 +29,9 @@ const messages = {
 
 ReactDOM.render(
   <Provider store={store}>
-    <I18nProvider messages={messages}>
-      <App />
-    </I18nProvider>
+    {/* <I18nProvider messages={messages}> */}
+    <App />
+    {/* </I18nProvider> */}
   </Provider>,
   document.getElementById('root')
 )

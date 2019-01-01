@@ -1,12 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import TextField from '@material-ui/core/TextField'
 import Button from '../../../components/Button'
+import Input from '../../../components/Input'
+import getRules from '../../../constants/validatingRules'
 import styles from './index.less'
 
 class RequestModal extends React.PureComponent {
@@ -22,7 +20,9 @@ class RequestModal extends React.PureComponent {
 
   state = {}
 
-  sendInvite = () => {}
+  sendInvite = () => {
+    console.log('onclick')
+  }
 
   render() {
     const { open, onClose } = this.props
@@ -36,34 +36,28 @@ class RequestModal extends React.PureComponent {
           <DialogContent>
             <section className={styles.main}>
               <h1>Request an invite</h1>
-              <TextField
-                autoFocus
-                id="fullname"
-                label="Full Name"
-                hintText="Password"
-                floatingLabelText="Password"
-                type="password"
-                errorText={this.state.password_error_text}
-                onChange={e => this.changeValue(e, 'password')}
-                onBlur={this.isDisabled}
-                fullWidth
-              />
-              <TextField
-                margin="dense"
-                id="email"
-                label="Email Address"
-                type="email"
-                fullWidth
-              />
+              <div className={styles.form}>
+                <Input
+                  rule={getRules('fullname')}
+                  type="text"
+                  placeholder="Full Name"
+                  minLength={3}
+                  required
+                />
+                <Input
+                  rule={getRules('email')}
+                  type="email"
+                  placeholder="Email"
+                  required
+                />
+                <Input
+                  rule={getRules('confirmation')}
+                  type="text"
+                  placeholder="Confirm Email"
+                  required
+                />
+              </div>
 
-              <TextField
-                hintText="Password"
-                floatingLabelText="Password"
-                type="password"
-                errorText={this.state.password_error_text}
-                onChange={e => this.changeValue(e, 'password')}
-                onBlur={this.isDisabled}
-              />
               <Button
                 style={{ fontSize: '1.5rem' }}
                 onClick={this.sendInvite}

@@ -38,9 +38,5 @@ module.exports = {
       ],
       "no-console": ["warn", { allow: ["warn", "error"] }],
       "prettier/prettier":"error",
-      "quotes": [
-        "error",
-        "single"
-      ],
     }
 };

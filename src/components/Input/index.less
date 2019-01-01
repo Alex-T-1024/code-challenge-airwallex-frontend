@@ -1,0 +1,22 @@
+@import '../../App.less';
+
+.main {
+  width: 100%;
+  margin: 1rem 0;
+
+  input {
+    width: 100%;
+    border: 0.2rem solid @grey;
+    padding: 1rem;
+    box-sizing: border-box;
+    &:focus {
+      border-color: black;
+      background-color: @dividerGrey;
+      outline: none;
+    }
+  }
+
+  .invalid {
+    border: 0.3rem solid red;
+  }
+}
