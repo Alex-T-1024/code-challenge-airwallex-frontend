@@ -19,7 +19,7 @@ const styles = {
 
 function MyButton(props) {
   const { classes, children, className, ...other } = props
-
+  console.log(other, 111)
   return (
     <Button className={classNames(classes.root, className)} {...other}>
       {children || 'class names'}
