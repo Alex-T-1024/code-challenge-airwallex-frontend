@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-const Context = React.createContext(0);
+const Context = React.createContext(0)
 
 const Row = ({ align, gutter, justify, children }) => {
   const styles = {
@@ -9,13 +9,13 @@ const Row = ({ align, gutter, justify, children }) => {
       justifyContent: justify || 'flex-start',
       alignItems: align || 'flex-start',
     },
-  };
+  }
   return (
     <Context.Provider value={gutter}>
       <div style={styles.container}>{children}</div>
     </Context.Provider>
-  );
-};
+  )
+}
 
-export default Row;
-export { Context as RowContext };
+export default Row
+export { Context as RowContext }

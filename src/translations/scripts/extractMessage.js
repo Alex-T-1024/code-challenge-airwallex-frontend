@@ -1,9 +1,9 @@
-import * as fs from 'fs';
-import { sync as globSync } from 'glob';
-import { sync as mkdirpSync } from 'mkdirp';
+import * as fs from 'fs'
+import { sync as globSync } from 'glob'
+import { sync as mkdirpSync } from 'mkdirp'
 
-const filePattern = './build/messages/**/*.json';
-const outputDir = './build/locales/';
+const filePattern = './build/messages/**/*.json'
+const outputDir = './build/locales/'
 
 // Aggregates the default messages that were extracted from the example app's
 // React components via the React Intl Babel plugin. An error will be thrown if
@@ -15,18 +15,18 @@ let defaultMessages = globSync(filePattern)
   .reduce((collection, descriptors) => {
     descriptors.forEach(({ id, defaultMessage }) => {
       if (collection.hasOwnProperty(id)) {
-        throw new Error(`Duplicate message id: ${id}`);
+        throw new Error(`Duplicate message id: ${id}`)
       }
-      collection[id] = defaultMessage;
-    });
+      collection[id] = defaultMessage
+    })
 
-    return collection;
-  }, {});
+    return collection
+  }, {})
 // Create a new directory that we want to write the aggregate messages to
-mkdirpSync(outputDir);
+mkdirpSync(outputDir)
 
 // Write the messages to this directory
 fs.writeFileSync(
   outputDir + 'en.json',
   JSON.stringify(defaultMessages, null, 2)
-);
+)

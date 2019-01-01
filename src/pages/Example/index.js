@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
-import { Col, Row } from '../../components';
-import { fetchExample } from './model';
+import React from 'react'
+import { connect } from 'react-redux'
+import { FormattedMessage } from 'react-intl'
+import { Col, Row } from '../../components'
+import { fetchExample } from './model'
 
 class Example extends React.PureComponent {
   render() {
@@ -33,17 +33,17 @@ class Example extends React.PureComponent {
           description="intro of en.json"
         />
       </>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => ({
   reduxState: state.example,
-});
+})
 
-const mapDispatchToProps = { fetchExample };
+const mapDispatchToProps = { fetchExample }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Example);
+)(Example)

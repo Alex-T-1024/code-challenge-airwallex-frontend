@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import './App.css';
-import Routes from './Routes';
+import React, { Component } from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+import Routes from './Routes'
+import BasicLayout from './components/Layouts/BasicLayout'
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
+        <BasicLayout>
           <Routes />
-        </div>
+        </BasicLayout>
       </Router>
-    );
+    )
   }
 }
 
-export default App;
+export default App

@@ -1,10 +1,10 @@
-import { takeEvery } from 'redux-saga/effects';
+import { takeEvery } from 'redux-saga/effects'
 
 function* waitUntilPrevDone(saga, ...args) {
   try {
-    yield* saga(...args);
+    yield* saga(...args)
   } catch (e) {
-    console.error('API Error:', e);
+    console.error('API Error:', e)
   }
 }
 
@@ -16,18 +16,18 @@ function* waitUntilPrevDone(saga, ...args) {
  * @param  {...any} args
  */
 export function takeUntilPrevDone(ms, pattern, saga, ...args) {
-  let isPrevDone = true;
-  let prevDate = Date.now();
+  let isPrevDone = true
+  let prevDate = Date.now()
   return takeEvery(
     pattern,
     function*(...args) {
       if (isPrevDone || (ms > 0 && Date.now() - prevDate >= ms)) {
-        isPrevDone = false;
-        prevDate = Date.now();
-        yield* waitUntilPrevDone(saga, ...args);
-        isPrevDone = true;
-      } else return;
+        isPrevDone = false
+        prevDate = Date.now()
+        yield* waitUntilPrevDone(saga, ...args)
+        isPrevDone = true
+      } else return
     },
     ...args
-  );
+  )
 }

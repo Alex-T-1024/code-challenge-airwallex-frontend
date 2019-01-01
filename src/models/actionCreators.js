@@ -4,7 +4,7 @@ import {
   toastSuccess,
   toastFail,
   toastLoading,
-} from './common/toast';
+} from './common/toast'
 
 const actionCreators = {
   toastClose,
@@ -12,6 +12,6 @@ const actionCreators = {
   toastSuccess,
   toastFail,
   toastLoading,
-};
+}
 
-export default actionCreators;
+export default actionCreators
