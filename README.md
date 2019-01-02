@@ -29,5 +29,5 @@ npm start
 - /src/containers 容器型组件(Container component)
 
 ## 联系方式
-Tel: 18516559341
-Email: yepeng.tian@outlook.com
+- Tel: 18516559341
+- Email: yepeng.tian@outlook.com
