@@ -27,6 +27,7 @@ class Input extends React.PureComponent {
 
   render() {
     const { rule, form, ...rest } = this.props
+    delete rest.dispatch
     const { isValid, errorMessage } = getItemFromForm(form, rule)
     return (
       <div className={styles.main}>

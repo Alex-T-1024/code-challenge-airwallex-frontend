@@ -50,24 +50,25 @@ export function clearForm(payload) {
  */
 const stateForm = []
 function form(state = stateForm, action) {
+  let validater, errorMessage
   switch (action.type) {
     case 'VALIDATE_FULLNAME':
-      const validater = value => value.length >= 3
-      const errorMessage = 'Please input at least three characters.'
+      validater = value => value.length >= 3
+      errorMessage = 'Please input at least three characters.'
       return getNewState(state, action, validater, errorMessage)
 
     case 'VALIDATE_EMAIL':
-      const validater = value =>
+      validater = value =>
         value.match(
           /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         )
-      const errorMessage = 'Please input valid email.'
+      errorMessage = 'Please input valid email.'
       return getNewState(state, action, validater, errorMessage)
 
     case 'VALIDATE_CONFIRMATION_EMAIL':
       const emailItem = getItemFromForm(state, 'VALIDATE_EMAIL')
-      const validater = value => value === emailItem.value
-      const errorMessage = "Email doesn't match"
+      validater = value => value === emailItem.value
+      errorMessage = "Email doesn't match"
       return getNewState(state, action, validater, errorMessage)
 
     case 'VALIDATE_FORM':

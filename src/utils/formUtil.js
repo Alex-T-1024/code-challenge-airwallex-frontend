@@ -6,7 +6,7 @@ export function addOrUpdateForm(form, newItem) {
 
 export function getItemFromForm(form, type) {
   let item = form.find(item => item.rule === type)
-  if (!item) item = { rule: type }
+  if (!item) item = { rule: type, isValid: true }
   return item
 }
 
