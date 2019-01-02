@@ -26,8 +26,7 @@ class Input extends React.Component {
   }
 
   render() {
-    const { rule, form, ...rest } = this.props
-    delete rest.dispatch
+    const { rule, form, dispatch, ...rest } = this.props
     const { isValid, errorMessage } = getItemFromForm(form, rule)
     return (
       <div className={styles.main}>

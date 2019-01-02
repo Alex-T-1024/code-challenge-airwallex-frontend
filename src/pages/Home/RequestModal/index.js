@@ -27,7 +27,6 @@ class RequestModal extends React.PureComponent {
   state = {}
 
   sendInvite = () => {
-    console.log('onclick')
     const {
       validateFullname,
       validateEmail,
@@ -41,7 +40,7 @@ class RequestModal extends React.PureComponent {
   }
 
   render() {
-    const { open, onClose } = this.props
+    const { open, onClose, requestResult } = this.props
     return (
       <div>
         <Dialog
@@ -74,8 +73,11 @@ class RequestModal extends React.PureComponent {
                 style={{ fontSize: '1.5rem' }}
                 onClick={this.sendInvite}
                 fullWidth
+                disabled={requestResult.isRequesting}
               >
-                Send
+                {requestResult.isRequesting
+                  ? 'Sending, please wait...'
+                  : 'Send'}
               </Button>
             </section>
           </DialogContent>
@@ -85,6 +87,10 @@ class RequestModal extends React.PureComponent {
   }
 }
 
+const mapStateToProps = state => ({
+  requestResult: state.requestResult,
+})
+
 const mapDispatchToProps = {
   validateFullname,
   validateEmail,
@@ -93,6 +99,6 @@ const mapDispatchToProps = {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(RequestModal)

@@ -13,7 +13,7 @@ export function getItemFromForm(form, type) {
 export function getNewState(state, action, validater, errorMessage) {
   const item = getItemFromForm(state, action.type)
   try {
-    item.value = action.value
+    if (action.value !== undefined) item.value = action.value
     item.errorMessage = errorMessage
     item.isValid = validater(item.value)
   } catch {

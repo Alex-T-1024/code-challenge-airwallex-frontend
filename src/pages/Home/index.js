@@ -1,25 +1,30 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { clearForm } from '../../models/common/form'
+import {
+  closeAllModal,
+  openRequestModal,
+  openSuccessModal,
+} from '../../models/common/modal'
 import Button from '../../components/Button'
 import styles from './index.less'
 import RequestModal from './RequestModal'
+import SuccessModal from './SuccessModal'
 
 class Home extends React.PureComponent {
-  state = {
-    open: true,
+  openModal = () => {
+    const { openRequestModal } = this.props
+    openRequestModal()
   }
 
-  openModal = () => {
-    this.setState({ open: true })
-  }
   closeModal = () => {
-    this.setState({ open: false })
-    this.props.clearForm()
+    const { clearForm, closeAllModal } = this.props
+    closeAllModal()
+    clearForm()
   }
 
   render() {
-    const { open } = this.state
+    const { modal } = this.props
     return (
       <main className={styles.home}>
         <h1>A better way</h1>
@@ -28,14 +33,23 @@ class Home extends React.PureComponent {
         <Button style={{ fontSize: '1.8rem' }} onClick={this.openModal}>
           Request an invite
         </Button>
-        <RequestModal open={open} onClose={this.closeModal} />
+        <RequestModal open={modal.isRequest} onClose={this.closeModal} />
+        <SuccessModal open={modal.isSuccess} onClose={this.closeModal} />
       </main>
     )
   }
 }
 
-const mapDispatchToProps = { clearForm }
+const mapStateToProps = state => ({
+  modal: state.modal,
+})
+const mapDispatchToProps = {
+  clearForm,
+  closeAllModal,
+  openRequestModal,
+  openSuccessModal,
+}
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Home)

@@ -1,7 +1,9 @@
-import { call, takeLatest, select } from 'redux-saga/effects'
+import axios from 'axios'
+import { put, takeLatest, select } from 'redux-saga/effects'
 import { getItemFromForm, getNewState } from '../../utils/formUtil'
+import { closeAllModal, openSuccessModal } from './modal'
 
-// Actions
+// ActionCreators
 export function validateFullname(value) {
   return {
     type: 'VALIDATE_FULLNAME',
@@ -35,6 +37,20 @@ export function postFormData() {
   }
 }
 
+export function setRequestLoading(payload) {
+  return {
+    type: 'SET_REQUEST_LOADING',
+    payload,
+  }
+}
+
+export function setResponseData(payload) {
+  return {
+    type: 'SET_RESPONSE_DATA',
+    payload,
+  }
+}
+
 // Reducers
 /**
  * stateForm: [
@@ -48,7 +64,7 @@ export function postFormData() {
  * ]
  */
 const stateForm = []
-function form(state = stateForm, action) {
+export function form(state = stateForm, action) {
   let validater, errorMessage
   switch (action.type) {
     case 'VALIDATE_FULLNAME':
@@ -78,15 +94,53 @@ function form(state = stateForm, action) {
   }
 }
 
+const stateRequestResult = { isRequesting: false, error: '', isSuccess: false }
+export function requestResult(state = stateRequestResult, action) {
+  switch (action.type) {
+    case 'SET_REQUEST_LOADING':
+      return {
+        ...state,
+        isRequesting: action.payload.isRequesting,
+      }
+    case 'SET_RESPONSE_DATA':
+      return {
+        ...state,
+        error: action.payload.error,
+      }
+    default:
+      return state
+  }
+}
+
 // Sagas
 function* postFormDataSaga() {
-  console.log(111)
   const form = yield select(state => state.form)
-  console.log(111, form)
+  if (form.every(item => item.isValid)) {
+    // Send request
+    yield put(setRequestLoading({ isRequesting: true }))
+    const res = yield axios.post(
+      'https://l94wc2001h.execute-api.ap-southeast-2.amazonaws.com/prod/fake-auth',
+      {
+        name: getItemFromForm(form, 'VALIDATE_FULLNAME'),
+        email: getItemFromForm(form, 'VALIDATE_EMAIL'),
+      }
+    )
+    yield put(setRequestLoading({ isRequesting: false }))
+    switch (res.status) {
+      case 200:
+        yield put(closeAllModal())
+        yield put(openSuccessModal())
+        break
+      case 400:
+        yield put(setResponseData({ error: res.data }))
+        break
+      default:
+    }
+  }
 }
 
-export function watchForm() {
-  takeLatest('POST_FORM_DATA', postFormDataSaga)
+export function* watchForm() {
+  yield takeLatest('POST_FORM_DATA', postFormDataSaga)
 }
 
-export { form }
+// API
