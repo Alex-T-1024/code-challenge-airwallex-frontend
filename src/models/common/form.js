@@ -51,6 +51,12 @@ export function setResponseData(payload) {
   }
 }
 
+export function resetResponseData(payload) {
+  return {
+    type: 'RESET_RESPONSE_DATA',
+  }
+}
+
 // Reducers
 /**
  * stateForm: [
@@ -106,6 +112,11 @@ export function requestResult(state = stateRequestResult, action) {
       return {
         ...state,
         error: action.payload.error,
+      }
+    case 'RESET_RESPONSE_DATA':
+      return {
+        ...state,
+        ...stateRequestResult,
       }
     default:
       return state

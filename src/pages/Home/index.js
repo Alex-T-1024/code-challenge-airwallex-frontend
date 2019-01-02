@@ -6,6 +6,7 @@ import {
   openRequestModal,
   openSuccessModal,
 } from '../../models/common/modal'
+import { resetResponseData } from '../../models/common/form'
 import Button from '../../components/Button'
 import styles from './index.less'
 import RequestModal from './RequestModal'
@@ -18,9 +19,10 @@ class Home extends React.PureComponent {
   }
 
   closeModal = () => {
-    const { clearForm, closeAllModal } = this.props
+    const { clearForm, closeAllModal, resetResponseData } = this.props
     closeAllModal()
     clearForm()
+    resetResponseData()
   }
 
   render() {
@@ -48,6 +50,7 @@ const mapDispatchToProps = {
   closeAllModal,
   openRequestModal,
   openSuccessModal,
+  resetResponseData,
 }
 export default connect(
   mapStateToProps,

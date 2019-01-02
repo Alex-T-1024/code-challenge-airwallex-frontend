@@ -24,8 +24,6 @@ class RequestModal extends React.PureComponent {
     onClose: PropTypes.func,
   }
 
-  state = {}
-
   sendInvite = () => {
     const {
       validateFullname,
@@ -79,6 +77,9 @@ class RequestModal extends React.PureComponent {
                   ? 'Sending, please wait...'
                   : 'Send'}
               </Button>
+              {requestResult.error && (
+                <p className={styles.serverError}>{requestResult.error}</p>
+              )}
             </section>
           </DialogContent>
         </Dialog>

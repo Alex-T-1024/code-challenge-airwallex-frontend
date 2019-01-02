@@ -34,7 +34,7 @@ class SuccessModal extends React.PureComponent {
               </p>
               <Button
                 style={{ fontSize: '1.5rem' }}
-                onClick={this.sendInvite}
+                onClick={onClose}
                 fullWidth
               >
                 OK
