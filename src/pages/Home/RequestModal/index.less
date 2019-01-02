@@ -1,9 +1,14 @@
 @import '../../../App.less';
+@media screen and (max-device-width: 500px) {
+}
 
 .main {
   margin: 4rem 1rem;
   width: 37.5rem;
   // height: 50rem;
+  @media (max-width: 500px) {
+    width: auto;
+  }
 
   h1 {
     text-align: center;
