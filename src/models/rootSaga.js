@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects'
-import { watchExample } from '../pages/Example/model'
+import { watchForm } from './common/form'
 
 export default function* rootSaga() {
-  yield all([watchExample()])
+  yield all([watchForm()])
 }

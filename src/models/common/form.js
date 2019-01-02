@@ -1,3 +1,4 @@
+import { call, takeLatest, select } from 'redux-saga/effects'
 import { getItemFromForm, getNewState } from '../../utils/formUtil'
 
 // Actions
@@ -22,17 +23,15 @@ export function validateConfirmationEmail(value) {
   }
 }
 
-export function validateForm(payload) {
+export function clearForm() {
   return {
-    type: 'VALIDATE_FORM',
-    payload,
+    type: 'CLEAR_FORM',
   }
 }
 
-export function clearForm(payload) {
+export function postFormData() {
   return {
-    type: 'CLEAR_FORM',
-    payload,
+    type: 'POST_FORM_DATA',
   }
 }
 
@@ -71,13 +70,23 @@ function form(state = stateForm, action) {
       errorMessage = "Email doesn't match"
       return getNewState(state, action, validater, errorMessage)
 
-    case 'VALIDATE_FORM':
-      return []
     case 'CLEAR_FORM':
       return []
+
     default:
       return state
   }
+}
+
+// Sagas
+function* postFormDataSaga() {
+  console.log(111)
+  const form = yield select(state => state.form)
+  console.log(111, form)
+}
+
+export function watchForm() {
+  takeLatest('POST_FORM_DATA', postFormDataSaga)
 }
 
 export { form }

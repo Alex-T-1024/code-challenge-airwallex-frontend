@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { getItemFromForm } from '../../utils/formUtil'
 import styles from './index.less'
 
-class Input extends React.PureComponent {
+class Input extends React.Component {
   static defaultProps = {
     onBlur: () => {},
   }

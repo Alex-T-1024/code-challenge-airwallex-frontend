@@ -1,7 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
+import {
+  validateFullname,
+  validateEmail,
+  validateConfirmationEmail,
+  postFormData,
+} from '../../../models/common/form'
 import Button from '../../../components/Button'
 import Input from '../../../components/Input'
 import styles from './index.less'
@@ -21,6 +28,16 @@ class RequestModal extends React.PureComponent {
 
   sendInvite = () => {
     console.log('onclick')
+    const {
+      validateFullname,
+      validateEmail,
+      validateConfirmationEmail,
+      postFormData,
+    } = this.props
+    validateFullname()
+    validateEmail()
+    validateConfirmationEmail()
+    postFormData()
   }
 
   render() {
@@ -68,4 +85,14 @@ class RequestModal extends React.PureComponent {
   }
 }
 
-export default RequestModal
+const mapDispatchToProps = {
+  validateFullname,
+  validateEmail,
+  validateConfirmationEmail,
+  postFormData,
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(RequestModal)

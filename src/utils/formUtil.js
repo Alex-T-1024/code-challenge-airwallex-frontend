@@ -12,8 +12,12 @@ export function getItemFromForm(form, type) {
 
 export function getNewState(state, action, validater, errorMessage) {
   const item = getItemFromForm(state, action.type)
-  item.value = action.value
-  item.errorMessage = errorMessage
-  item.isValid = validater(item.value)
+  try {
+    item.value = action.value
+    item.errorMessage = errorMessage
+    item.isValid = validater(item.value)
+  } catch {
+    item.isValid = false
+  }
   return addOrUpdateForm(state, item)
 }

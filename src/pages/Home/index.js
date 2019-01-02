@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { clearForm } from '../../models/common/form'
 import Button from '../../components/Button'
 import styles from './index.less'
 import RequestModal from './RequestModal'
@@ -13,6 +15,7 @@ class Home extends React.PureComponent {
   }
   closeModal = () => {
     this.setState({ open: false })
+    this.props.clearForm()
   }
 
   render() {
@@ -31,4 +34,8 @@ class Home extends React.PureComponent {
   }
 }
 
-export default Home
+const mapDispatchToProps = { clearForm }
+export default connect(
+  null,
+  mapDispatchToProps
+)(Home)
