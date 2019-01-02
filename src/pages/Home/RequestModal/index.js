@@ -4,7 +4,6 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import Button from '../../../components/Button'
 import Input from '../../../components/Input'
-import getRules from '../../../constants/validatingRules'
 import styles from './index.less'
 
 class RequestModal extends React.PureComponent {
@@ -38,23 +37,19 @@ class RequestModal extends React.PureComponent {
               <h1>Request an invite</h1>
               <div className={styles.form}>
                 <Input
-                  rule={getRules('fullname')}
+                  rule={'VALIDATE_FULLNAME'}
                   type="text"
                   placeholder="Full Name"
-                  minLength={3}
-                  required
                 />
                 <Input
-                  rule={getRules('email')}
+                  rule={'VALIDATE_EMAIL'}
                   type="email"
                   placeholder="Email"
-                  required
                 />
                 <Input
-                  rule={getRules('confirmation')}
+                  rule={'VALIDATE_CONFIRMATION_EMAIL'}
                   type="text"
                   placeholder="Confirm Email"
-                  required
                 />
               </div>
 
